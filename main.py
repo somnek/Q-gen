@@ -8,9 +8,10 @@ from transformers import (PegasusForConditionalGeneration, PegasusTokenizer,
 class Qgen():
   @staticmethod
   def generate(text: str, num_return_sequences: int = 10, num_beams: int = 10):
+    device = 'gpu'
     model_name = 'tuner007/pegasus_paraphrase'
     tokenizer = PegasusTokenizer.from_pretrained(model_name)
-    model = PegasusForConditionalGeneration.from_pretrained(model_name)
+    model = PegasusForConditionalGeneration.from_pretrained(model_name).to(device)
 
     batch = tokenizer(
       [text],
@@ -18,19 +19,18 @@ class Qgen():
       padding='longest',
       max_length=60, 
       return_tensors="pt"
-    )
-    start = time.time()
+    ).to(device)
+
     translated = model.generate(
       **batch,
       max_length=60,
       num_beams=num_beams, 
       num_return_sequences=num_return_sequences, 
       temperature=1.5
-    )
-    ela = (time.time() - start) 
-    print(f'elapsed time: {ela} sec')
+    ).to(device)
+
     tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
-    return tgt_text
+    return list(set(tgt_text))
 
   @staticmethod
   def paraphrase(text: str):
