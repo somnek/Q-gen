@@ -10,6 +10,13 @@ packages = [{include = "q_gen"}]
 python = "^3.10"
 shell = "^1.0.1"
 pre-commit = "^3.0.4"
+rich = "^13.3.1"
+transformers = "^4.26.1"
+torch = "^1.13.1"
+torchvision = "^0.14.1"
+torchaudio = "^0.13.1"
+ipython = "^8.10.0"
+sentencepiece = "^0.1.97"
 
 
 [build-system]
