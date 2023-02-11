@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "q-gen"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "q_gen"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+shell = "^1.0.1"
+pre-commit = "^3.0.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
